@@ -3,8 +3,10 @@ package com.sakebook.android.dialoghelper;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
@@ -13,7 +15,6 @@ import android.util.Log;
 public class SimpleDialogs extends DialogFragment implements OnClickListener {
 
 	private SimpleDialogsListener mListener;
-	private Activity mActivity;
 	
 	private String title = "";
 	private String message = "";
@@ -47,22 +48,23 @@ public class SimpleDialogs extends DialogFragment implements OnClickListener {
 	}
 	
 	/** Singleton. Fragmentはコンストラクタに引数は使えないため、Bundleに詰める。リソースID用。
+	 * @param context resource取得用context
 	 * @param title title
 	 * @param message message
 	 * @param positive positive button
 	 * @param negative negative button
 	 * @param neutral neutral button
 	 *  */
-	public static SimpleDialogs newInstance(int titleId, int messageId, int positiveId, int negativeId,
+	public static SimpleDialogs newInstance(Context context, int titleId, int messageId, int positiveId, int negativeId,
 			int neutralId) {
 		SimpleDialogs instance = new SimpleDialogs();
+		Resources res = context.getResources();
 		Bundle bundle = new Bundle();
-		bundle.putInt("title", titleId);
-		bundle.putInt("message", messageId);
-		bundle.putInt("positive", positiveId);
-		bundle.putInt("negative", negativeId);
-		bundle.putInt("neutral", neutralId);
-		bundle.putBoolean("hasResource", true);
+		bundle.putString("title", res.getString(titleId));
+		bundle.putString("message", res.getString(messageId));
+		bundle.putString("positive", res.getString(positiveId));
+		bundle.putString("negative", res.getString(negativeId));
+		bundle.putString("neutral", res.getString(neutralId));
 		instance.setArguments(bundle);
 		
 		return instance;
@@ -78,7 +80,6 @@ public class SimpleDialogs extends DialogFragment implements OnClickListener {
 			this.dismiss();
 			return;
         }
-		this.mActivity = activity;
         this.mListener = ((SimpleDialogsListener) activity);  
 	}
 
@@ -88,30 +89,11 @@ public class SimpleDialogs extends DialogFragment implements OnClickListener {
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		
-		/* TODO: もっと綺麗に書く */
-		if (getArguments().getBoolean("hasResource")) {
-    		if (getArguments().getInt("title") != 0) {
-        		this.title = mActivity.getString(getArguments().getInt("title"));
-    		}
-    		if (getArguments().getInt("message") != 0) {
-        		this.message = mActivity.getString(getArguments().getInt("message"));
-    		}
-    		if (getArguments().getInt("positive") != 0) {
-				this.positive = mActivity.getString(getArguments().getInt("positive"));
-    		}
-    		if (getArguments().getInt("negative") != 0) {
-	    		this.negative = mActivity.getString(getArguments().getInt("negative"));
-    		}
-    		if (getArguments().getInt("neutral") != 0) {
-	    		this.neutral = mActivity.getString(getArguments().getInt("neutral"));
-    		}
-		}else {
-    		this.title = getArguments().getString("title");
-    		this.message = getArguments().getString("message");
-    		this.positive = getArguments().getString("positive");
-    		this.negative = getArguments().getString("negative");
-    		this.neutral = getArguments().getString("neutral");
-		}
+		this.title = getArguments().getString("title");
+		this.message = getArguments().getString("message");
+		this.positive = getArguments().getString("positive");
+		this.negative = getArguments().getString("negative");
+		this.neutral = getArguments().getString("neutral");
 		
 		builder.setTitle(title);
 		builder.setMessage(message);

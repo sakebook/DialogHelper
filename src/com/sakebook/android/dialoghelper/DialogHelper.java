@@ -47,7 +47,7 @@ public class DialogHelper {
 			int positiveId, int negativeId, int neutralId, String tag) {
 		if (checkExtends(context)){
 			FragmentManager manager = ((FragmentActivity)context).getSupportFragmentManager();
-			SimpleDialogs dialog = SimpleDialogs.newInstance(titleId, messageId, positiveId, negativeId, neutralId);
+			SimpleDialogs dialog = SimpleDialogs.newInstance(context, titleId, messageId, positiveId, negativeId, neutralId);
 			dialog.show(manager, tag);
 		}
 	}
@@ -67,6 +67,7 @@ public class DialogHelper {
 	        dialogFragment.show(manager, tag);
 		}
 	}
+	
 	
 	private static boolean checkExtends(Context context) {
 		if (context instanceof FragmentActivity == false) {  
