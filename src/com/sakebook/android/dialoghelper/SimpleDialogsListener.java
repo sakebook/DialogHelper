@@ -3,17 +3,19 @@ package com.sakebook.android.dialoghelper;
 import android.content.DialogInterface;
 
 /**
- * シンプルダイアログのイベントのコールバック.
+ * 繧ｷ繝ｳ繝励Ν繝繧､繧｢繝ｭ繧ｰ縺ｮ繧､繝吶Φ繝医�ｮ繧ｳ繝ｼ繝ｫ繝舌ャ繧ｯ.
  * */
 public interface SimpleDialogsListener {
 	
+	public static final int DISMISS = -1;
 	public static final int BUTTON_CANCEL = 0;
-	public static final int BUTTON_CLICK_POSITIVE = -1;
-	public static final int BUTTON_CLICK_NEGATVE = -2;
-	public static final int BUTTON_CLICK_NEUTRAL = -3;
+	public static final int BUTTON_CLICK_POSITIVE = 1;
+	public static final int BUTTON_CLICK_NEGATVE = 2;
+	public static final int BUTTON_CLICK_NEUTRAL = 3;
 	
 	public void simplePositiveClick(DialogInterface dialog, int which);
 	public void simpleNegativeClick(DialogInterface dialog, int which);
 	public void simpleNeutralClick(DialogInterface dialog, int which);
 	public void simpleCancel(DialogInterface dialog, int which);
+	public void simpleDismiss(int which);
 }

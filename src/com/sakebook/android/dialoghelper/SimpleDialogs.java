@@ -3,10 +3,8 @@ package com.sakebook.android.dialoghelper;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
@@ -21,20 +19,24 @@ public class SimpleDialogs extends DialogFragment implements OnClickListener {
 	private String positive = "";
 	private String negative = "";
 	private String neutral = "";
+	private Boolean outsideCancel = true;
+	private Boolean backCancel = true;
 	
 	public SimpleDialogs() {
 	}
 	
 	
-	/** Singleton. Fragment‚ÍƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Éˆø”‚Íg‚¦‚È‚¢‚½‚ßABundle‚É‹l‚ß‚éB
+	/** 
+	 * Fragmentã¯ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã«å¼•æ•°ã¯ä½¿ãˆãªã„ãŸã‚ã€Bundleã«è©°ã‚ã‚‹ã€‚
 	 * @param title title
 	 * @param message message
 	 * @param positive positive button
 	 * @param negative negative button
 	 * @param neutral neutral button
+	 * @return SimpleDialogs
 	 *  */
 	public static SimpleDialogs newInstance(String title, String message, String positive, String negative,
-			String neutral) {
+			String neutral, Boolean outsideCancel, Boolean backCancel) {
 		SimpleDialogs instance = new SimpleDialogs();
 		Bundle bundle = new Bundle();
 		bundle.putString("title", title);
@@ -42,32 +44,16 @@ public class SimpleDialogs extends DialogFragment implements OnClickListener {
 		bundle.putString("positive", positive);
 		bundle.putString("negative", negative);
 		bundle.putString("neutral", neutral);
+		bundle.putBoolean("outsideCancel", outsideCancel);
+		bundle.putBoolean("backCancel", backCancel);
 		instance.setArguments(bundle);
 		
 		return instance;
 	}
 	
-	/** Singleton. Fragment‚ÍƒRƒ“ƒXƒgƒ‰ƒNƒ^‚Éˆø”‚Íg‚¦‚È‚¢‚½‚ßABundle‚É‹l‚ß‚éBƒŠƒ\[ƒXID—pB
-	 * @param context resourceæ“¾—pcontext
-	 * @param title title
-	 * @param message message
-	 * @param positive positive button
-	 * @param negative negative button
-	 * @param neutral neutral button
-	 *  */
-	public static SimpleDialogs newInstance(Context context, int titleId, int messageId, int positiveId, int negativeId,
-			int neutralId) {
-		SimpleDialogs instance = new SimpleDialogs();
-		Resources res = context.getResources();
-		Bundle bundle = new Bundle();
-		bundle.putString("title", res.getString(titleId));
-		bundle.putString("message", res.getString(messageId));
-		bundle.putString("positive", res.getString(positiveId));
-		bundle.putString("negative", res.getString(negativeId));
-		bundle.putString("neutral", res.getString(neutralId));
-		instance.setArguments(bundle);
-		
-		return instance;
+	public static SimpleDialogs newInstance(String title, String message, String positive, String negative,
+			String neutral) {
+		return newInstance(title, message, positive, negative, neutral, true, true);
 	}
 	
 
@@ -76,7 +62,7 @@ public class SimpleDialogs extends DialogFragment implements OnClickListener {
 		super.onAttach(activity);
 		
 		if (activity instanceof SimpleDialogsListener == false) {  
-			Log.w(DialogHelper.class.getSimpleName(), "FragmentActivity ‚ª SimpleDialogListener ‚ğÀ‘•‚µ‚Ä‚¢‚Ü‚¹‚ñ.");
+			Log.w(DialogHelper.class.getSimpleName(), "FragmentActivity ãŒ SimpleDialogListener ã‚’å®Ÿè£…ã—ã¦ã„ã¾ã›ã‚“.");
 			this.dismiss();
 			return;
         }
@@ -94,6 +80,8 @@ public class SimpleDialogs extends DialogFragment implements OnClickListener {
 		this.positive = getArguments().getString("positive");
 		this.negative = getArguments().getString("negative");
 		this.neutral = getArguments().getString("neutral");
+		this.outsideCancel = getArguments().getBoolean("outsideCancel");
+		this.backCancel = getArguments().getBoolean("backCancel");
 		
 		builder.setTitle(title);
 		builder.setMessage(message);
@@ -106,7 +94,12 @@ public class SimpleDialogs extends DialogFragment implements OnClickListener {
 		if (!TextUtils.isEmpty(neutral)) {
 			builder.setNeutralButton(neutral, this);
 		}
-		return builder.create();
+		
+		Dialog dialog = builder.create();
+		dialog.setCanceledOnTouchOutside(outsideCancel);
+		setCancelable(backCancel);
+		
+		return dialog;
 	}
 
 	
@@ -120,6 +113,7 @@ public class SimpleDialogs extends DialogFragment implements OnClickListener {
 	@Override
 	public void dismiss() {
 		super.dismiss();
+		mListener.simpleDismiss(SimpleDialogsListener.DISMISS);
 	}
 
 	
@@ -141,6 +135,9 @@ public class SimpleDialogs extends DialogFragment implements OnClickListener {
 			break;
 		case SimpleDialogsListener.BUTTON_CLICK_NEUTRAL:
 			mListener.simpleNeutralClick(dialog, which);
+			break;
+		case SimpleDialogsListener.DISMISS:
+			mListener.simpleDismiss(which);
 			break;
 		default:
 			mListener.simpleCancel(dialog, SimpleDialogsListener.BUTTON_CANCEL);

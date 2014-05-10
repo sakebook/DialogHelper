@@ -27,7 +27,7 @@ public class CustomDialogs extends DialogFragment implements OnClickListener {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		if (activity instanceof CustomDialogsListener == false) {  
-			Log.w(DialogHelper.class.getSimpleName(), "FragmentActivity ‚ª CustomDialogListener ‚ğÀ‘•‚µ‚Ä‚¢‚Ü‚¹‚ñ.");
+			Log.w(DialogHelper.class.getSimpleName(), "FragmentActivity ãŒ CustomDialogListener ã‚’å®Ÿè£…ã—ã¦ã„ã¾ã›ã‚“.");
 			this.dismiss();
         }  
         this.mListener = ((CustomDialogsListener) activity);  
@@ -42,19 +42,29 @@ public class CustomDialogs extends DialogFragment implements OnClickListener {
 	}
 
 	
-	/** singleton. ó‚¯æ‚Á‚½layoutId‚ÆƒCƒxƒ“ƒg‚ğ‹N‚±‚µ‚½‚¢View‚ÌId‚ğbundle‚ÉƒZƒbƒg */
-	public static CustomDialogs newInstance(int bodyLayoutId, ArrayList<Integer> eventList) {
+	/** 
+	 * å—ã‘å–ã£ãŸlayoutIdã¨ã‚¤ãƒ™ãƒ³ãƒˆã‚’èµ·ã“ã—ãŸã„Viewã®Idã‚’bundleã«ã‚»ãƒƒãƒˆ
+	 *  */
+	public static CustomDialogs newInstance(int bodyLayoutId, ArrayList<Integer> eventList, Boolean outsideCancel, Boolean backCancel) {
 		CustomDialogs instance = new CustomDialogs();
 		Bundle bundle = new Bundle();
 		bundle.putInt("body", bodyLayoutId);
 		bundle.putIntegerArrayList("eventList", eventList);
+		bundle.putBoolean("outsideCancel", outsideCancel);
+		bundle.putBoolean("backCancel", backCancel);
 		instance.setArguments(bundle);
 		
 		return instance;
 	}
 
+	public static CustomDialogs newInstance(int bodyLayoutId, ArrayList<Integer> eventList) {
+		return newInstance(bodyLayoutId, eventList, true, true);
+	}
+
 	
-	/** ƒ_ƒCƒAƒƒO‚Ì’†‚¾‚¯•ÏX‚µ‚½‚¢ê‡‚±‚¿‚ç‚ğg‚¤B */
+	/** 
+	 * ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ä¸­ã ã‘å¤‰æ›´ã—ãŸã„å ´åˆã“ã¡ã‚‰ã‚’ä½¿ã†ã€‚
+	 *  */
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		if (Build.VERSION.SDK_INT <= 10) {
@@ -71,14 +81,18 @@ public class CustomDialogs extends DialogFragment implements OnClickListener {
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		builder.setView(body);
+		Dialog dialog = builder.create();
 		
-		return builder.create();
+		dialog.setCanceledOnTouchOutside(getArguments().getBoolean("outsideCancel"));
+		setCancelable(getArguments().getBoolean("backCancel"));
+		
+		return dialog;
 	}
 	
 	
 	/** 
-	 * 2.x‘ä‚ÍƒtƒŒ[ƒ€‚ªc‚Á‚Ä‚µ‚Ü‚¤‚Ì‚ÅAonCreateDialog‚Å‚Í‚È‚­‚±‚¿‚ç‚ğg‚Á‚Äƒ_ƒCƒAƒƒO‚ğˆê‚©‚ç¶¬B
-	 * bundle‚ÉƒZƒbƒg‚³‚ê‚½î•ñ‚ğ‰Á‚¦AƒŒƒCƒAƒEƒg‚ğ•Ô‚·B */
+	 * 2.xå°ã¯ãƒ•ãƒ¬ãƒ¼ãƒ ãŒæ®‹ã£ã¦ã—ã¾ã†ã®ã§ã€onCreateDialogã§ã¯ãªãã“ã¡ã‚‰ã‚’ä½¿ã£ã¦ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã‚’ä¸€ã‹ã‚‰ç”Ÿæˆã€‚
+	 * bundleã«ã‚»ãƒƒãƒˆã•ã‚ŒãŸæƒ…å ±ã‚’åŠ ãˆã€ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’è¿”ã™ã€‚ */
 	@Override  
 	public View onCreateView(LayoutInflater inflater, ViewGroup view, Bundle bundle) {
 		if (Build.VERSION.SDK_INT > 10) {
@@ -100,7 +114,14 @@ public class CustomDialogs extends DialogFragment implements OnClickListener {
 		mListener.customCancel(CustomDialogsListener.BUTTON_CANCEL);
 	}
 
+	
+	@Override
+	public void dismiss() {
+		super.dismiss();
+		mListener.customDismiss(CustomDialogsListener.DISMISS);
+	}
 
+	
 	@Override
 	public void onClick(View v) {
 		mListener.customClick(CustomDialogsListener.BUTTON_CLICK, v);

@@ -2,16 +2,18 @@ package com.sakebook.android.dialoghelper;
 
 import android.view.View;
 
-/**
- * ƒ_ƒCƒAƒƒO‚ÌƒCƒxƒ“ƒg‚ÌƒR[ƒ‹ƒoƒbƒN.
- * id‚Í‚±‚±‚Å’è‹`‚µ‚Äê‡•ª‚¯‚É—p‚¢‚éB
- * v‚ÍƒCƒxƒ“ƒg‚ª‹N‚«‚½ViewB
- * */
-public interface CustomDialogsListener {
+	/**
+	 * ãƒ€ã‚¤ã‚¢ãƒ­ã‚°ã®ã‚¤ãƒ™ãƒ³ãƒˆã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯.
+	 * idã¯ã“ã“ã§å®šç¾©ã—ã¦å ´åˆåˆ†ã‘ã«ç”¨ã„ã‚‹ã€‚
+	 * vã¯ã‚¤ãƒ™ãƒ³ãƒˆãŒèµ·ããŸViewã€‚
+	 * */
+	public interface CustomDialogsListener {
 	
-	public static final int BUTTON_CLICK = 1;
+	public static final int DISMISS = -1;
 	public static final int BUTTON_CANCEL = 0;
+	public static final int BUTTON_CLICK = 1;
 	
 	public void customClick(int id, View v);
 	public void customCancel(int id);
+	public void customDismiss(int id);
 }
