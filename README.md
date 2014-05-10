@@ -11,7 +11,32 @@ Easy way to make dialog for everyone.
 
 ## 使い方
  * SimpleDialog
-   * 第3~5引数はボタンのラベルになる。
+   * Chain method
+
+```
+DialogHelper.create(this)
+    .setTitle("title")
+    .setMessage("message")
+    .setPositive("label")
+    .setTouchCancelable(true)
+    .build();
+```
+
+* CustomDialog
+  * Chain method
+
+```
+DialogHelper.customCreate(this)
+    .setLayout(R.layout.layoutId)
+    .setEventList(getEventList())
+    .setBackCancelable(true)
+    .build();
+```
+
+
+  * ~~SimpleDialog~~
+
+   * ~~第3~5引数はボタンのラベルになる。~~
 
 
 ```
@@ -19,8 +44,8 @@ Easy way to make dialog for everyone.
 
 ```
 
- * CustomDialog
-   * 第2引数は利用したいレイアウトのリソースID, 第3引数はイベントハンドリングしたいViewのIDを詰めたList
+ * ~~CustomDialog~~
+   * ~~第2引数は利用したいレイアウトのリソースID, 第3引数はイベントハンドリングしたいViewのIDを詰めたList~~
 
 ```
  DialogHelper.callCustomDialog(this, R.layout.layoutId, getEventList(), "tag");
