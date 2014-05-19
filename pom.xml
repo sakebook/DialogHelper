@@ -28,6 +28,14 @@
 	    <connection>scm:git:git://github.com/sakebook/android-library-dialog-DialogHelper.git</connection>
 	    <developerConnection>scm:git:git://github.com/sakebook/android-library-dialog-DialogHelper.git</developerConnection>
 	</scm>
+  
+    <distributionManagement>
+	    <repository>
+	      <id>sonatype-nexus-staging</id>
+	      <name>Nexus Staging Repository</name>
+	      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+	    </repository>
+  	</distributionManagement>
 	
 	<developers>
 	    <developer>
@@ -48,6 +56,7 @@
 	
 	<properties>
 		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<maven.release.encoding>UTF-8</maven.release.encoding>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <android.version>4.1.1.4</android.version>
@@ -135,6 +144,8 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.4</version>
 				<configuration>
+                    <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
+                    <outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
 					<mavenExecutorId>forked-path</mavenExecutorId>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
