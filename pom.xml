@@ -1,5 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
 	<parent>
     	<groupId>org.sonatype.oss</groupId>
     	<artifactId>oss-parent</artifactId>
@@ -84,7 +85,6 @@
 		    <directory>res</directory>
 		   </resource>	  	
 		</resources>
-
 		<pluginManagement>
 			<plugins>
 		    	<plugin>
@@ -106,13 +106,12 @@
 					<configuration>
 						<androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
 						<sdk>
+							<path>${env.ANDROID_HOME}</path>
 							<platform>${android.platform}</platform>
 						</sdk>
                     </configuration>
                     <extensions>true</extensions>
  				</plugin>
-
-<!-- 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
@@ -128,8 +127,6 @@
 					<artifactId>maven-replacer-plugin</artifactId>
 					<version>1.4.0</version>
 				</plugin>
- -->				
- 
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -179,4 +176,5 @@
             </build>
         </profile>
     </profiles>
+    
 </project>
