@@ -128,15 +128,17 @@
 					<version>2.9</version>
 				</plugin>
 				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>1.7</version>
-				</plugin>
-				<plugin>
-					<groupId>com.google.code.maven-replacer-plugin</groupId>
-					<artifactId>maven-replacer-plugin</artifactId>
-					<version>1.4.0</version>
-				</plugin>
+	                <groupId>org.apache.maven.plugins</groupId>
+	                <artifactId>maven-source-plugin</artifactId>
+	                <executions>
+	                    <execution>
+	                        <phase>package</phase>
+	                        <goals>
+	                            <goal>jar</goal>
+	                        </goals>
+	                    </execution>
+	                </executions>
+	            </plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -169,7 +171,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.1</version>
+                        <version>1.4</version>
                         <configuration>
 	                        <inputEncoding>${project.build.sourceEncoding}</inputEncoding>
 		                    <outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
