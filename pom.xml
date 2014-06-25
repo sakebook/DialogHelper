@@ -9,7 +9,7 @@
 	
 	<groupId>com.github.sakebook</groupId>
 	<artifactId>DialogHelper</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.3</version>
   	<packaging>jar</packaging>
 	<name>DialogHelper</name>
 	<description>Easy way to make dialog for everyone.</description>
@@ -89,7 +89,7 @@
 	</dependencyManagement>
 	
 	<build>
-	  	<sourceDirectory>src</sourceDirectory>
+	  	<sourceDirectory>${base.dir}src</sourceDirectory>
 		<resources>
 		   <resource>
 		    <directory>res</directory>
@@ -126,6 +126,14 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>2.9</version>
+					<configuration>
+						<showPackage>false</showPackage>
+						<sdk>
+							<path>${env.ANDROID_HOME}</path>
+							<platform>${android.platform}</platform>
+						</sdk>
+					</configuration>
+					<extensions>true</extensions>
 				</plugin>
 				<plugin>
 	                <groupId>org.apache.maven.plugins</groupId>
