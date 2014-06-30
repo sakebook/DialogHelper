@@ -9,7 +9,7 @@
 	
 	<groupId>com.github.sakebook</groupId>
 	<artifactId>DialogHelper</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.3</version>
   	<packaging>jar</packaging>
 	<name>DialogHelper</name>
 	<description>Easy way to make dialog for everyone.</description>
@@ -28,7 +28,8 @@
 	    <connection>scm:git:git://github.com/sakebook/android-library-dialog-DialogHelper.git</connection>
 	    <developerConnection>scm:git:git://github.com/sakebook/android-library-dialog-DialogHelper.git</developerConnection>
 	
-	</scm>
+	  <tag>DialogHelper-0.0.3</tag>
+  </scm>
   
     <distributionManagement>
 	    <repository>
