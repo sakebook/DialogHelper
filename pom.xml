@@ -126,13 +126,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>2.9</version>
-					<configuration>
-						<showPackage>false</showPackage>
-						<sdk>
-							<path>${env.ANDROID_HOME}</path>
-							<platform>${android.platform}</platform>
-						</sdk>
-					</configuration>
 					<extensions>true</extensions>
 				</plugin>
 				<plugin>
