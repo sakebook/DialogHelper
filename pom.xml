@@ -9,7 +9,7 @@
 	
 	<groupId>com.github.sakebook</groupId>
 	<artifactId>DialogHelper</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.3-SNAPSHOT</version>
   	<packaging>jar</packaging>
 	<name>DialogHelper</name>
 	<description>Easy way to make dialog for everyone.</description>
