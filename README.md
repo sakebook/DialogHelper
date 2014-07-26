@@ -7,7 +7,9 @@ Easy way to make dialog for everyone.
  * DialogFragmentを一行で呼び出せます。独自のレイアウトにも対応。2.3以降対応。
 
 ## 取り込み方
- * 丸ごとimportし、Library Projectとして利用してください。
+```
+compile 'com.github.sakebook:DialogHelper:+'
+```
 
 ## 使い方
  * SimpleDialog
