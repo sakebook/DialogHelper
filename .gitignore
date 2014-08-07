@@ -4,3 +4,13 @@ target/
 .project
 .classpath
 .settings
+
+## android studio
+build/
+.gradle/
+/gradle.properties
+local.properties
+.idea/
+*.iml
+
+
