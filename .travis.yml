@@ -29,18 +29,6 @@ before_install:
 # manually set sdk.dir variable, according to local paths
   - echo "sdk.dir=$ANDROID_HOME" ]]> local.properties
 
-##
-# Android Components
-
-# Install required components.
-# For a full list, run `android list sdk -a --extended`
-  - echo yes | android update sdk --filter platform-tools --no-ui --force ]]> /dev/null
-  - echo yes | android update sdk --all --filter build-tools-19.0.3 --no-ui --force ]]> /dev/null
-  - echo yes | android update sdk --filter android-19 --no-ui --force ]]> /dev/null
-  - echo yes | android update sdk --filter extra-android-support --no-ui --force ]]> /dev/null
-  - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force ]]> /dev/null
-  - echo yes | android update sdk --filter extra-google-m2repository --no-ui --force ]]> /dev/null
-
 android:
   components:
     - build-tools-19.1.0
