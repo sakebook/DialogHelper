@@ -26,6 +26,7 @@ android:
     - extra-android-m2repository
   licenses:
     - android-sdk-license-bcbbd656
+    - android-sdk-license-5be876d5
 
 script:
   - ./gradlew clean test
