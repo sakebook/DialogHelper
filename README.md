@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sakebook/android-library-dialog-DialogHelper.svg?branch=gradle)](https://travis-ci.org/sakebook/android-library-dialog-DialogHelper)
+
 android-library-dialog-DialogHelper
 ===================================
 
