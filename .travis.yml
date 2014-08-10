@@ -10,24 +10,13 @@ env:
     - ANDROID_SDK_VERSION="r23.0.2"
 
 before_install:
-
-# required libs for android build tools
-# Update a system for ia32 libraries
   - sudo apt-get update -qq
-  - if [ `uname -m` = x86_64 ]; then sudo apt-get update; fi
   - if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch; fi
-
-##
-# Android SDK
-
-# newest android SDK
   - wget http://dl.google.com/android/android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
   - tar -zxf android-sdk_${ANDROID_SDK_VERSION}-linux.tgz
   - export ANDROID_HOME=`pwd`/android-sdk-linux
-  - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
-
-# manually set sdk.dir variable, according to local paths
-  - echo "sdk.dir=$ANDROID_HOME" ]]> local.properties
+  - export PATH=${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${PATH}
+  - android update sdk --filter platform-tools,android-14 --no-ui --force
 
 android:
   components:
