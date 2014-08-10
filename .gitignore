@@ -8,7 +8,7 @@ target/
 ## android studio
 build/
 .gradle/
-/gradle.properties
+dialoghelper/gradle.properties
 local.properties
 .idea/
 *.iml
