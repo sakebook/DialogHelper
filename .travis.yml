@@ -8,4 +8,4 @@ android:
   licenses:
     - android-sdk-license-bcbbd656
 script:
-  - ./gradlew clean test
+  - ./gradlew test
