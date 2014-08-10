@@ -1,5 +1,4 @@
 language: android
-jdk: oraclejdk6
 branches:
   only:
     - gradle
@@ -12,5 +11,5 @@ android:
     - extra-android-support
   licenses:
     - android-sdk-license-bcbbd656
-script:
-  - ./gradlew clean test
+#script:
+#  - ./gradlew clean test
