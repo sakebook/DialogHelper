@@ -1,8 +1,9 @@
 apply plugin: 'com.android.library'
+apply plugin: 'robolectric'
 
 android {
     compileSdkVersion 16
-    buildToolsVersion "20.0.0"
+    buildToolsVersion "19.1.0"
 
     defaultConfig {
         applicationId "com.sakebook.android.dialoghelper"
@@ -16,10 +17,25 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
+    sourceSets {
+        androidTest {
+            setRoot('src/test')
+        }
+    }
+}
+
+robolectric {
+    include "**/*Test.class"
+    exclude "**/espresso/*.class"
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:+'
+    compile 'com.android.support:support-v4:19.1+'
+
+    androidTestCompile 'junit:junit:4.11'
+    androidTestCompile 'com.squareup:fest-android:1.0.8@aar'
+    androidTestCompile('org.robolectric:robolectric:2.3')
 }
 
 apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
