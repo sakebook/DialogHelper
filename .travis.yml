@@ -1,4 +1,9 @@
 language: android
+jdk: oraclejdk6
+branches:
+  only:
+    - gradle
+
 android:
   components:
     - build-tools-19.1.0
@@ -8,4 +13,4 @@ android:
   licenses:
     - android-sdk-license-bcbbd656
 script:
-  - gradle test
+  - ./gradlew clean test
