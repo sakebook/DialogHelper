@@ -38,4 +38,4 @@ dependencies {
     androidTestCompile('org.robolectric:robolectric:2.3')
 }
 
-apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
+//apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
