@@ -32,9 +32,7 @@ android:
     - extra-google-m2repository
     - addon-google_apis-google-19
   licenses:
-    - 'android-sdk-license-bcbbd656'
-    - 'android-sdk-license-5be876d5'
-    - 'android-sdk-license-.+'
+    - '.+'
 
 script:
   - ./gradlew clean test
