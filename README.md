@@ -10,7 +10,7 @@ Easy way to make dialog for everyone.
 
 ## 取り込み方
 ```
-compile 'com.github.sakebook:DialogHelper:+'
+compile 'com.github.sakebook:DialogHelper:0.1.1@aar'
 ```
 
 ## 使い方
@@ -42,10 +42,8 @@ DialogHelper.customCreate(this)
 
    * ~~第3~5引数はボタンのラベルになる。~~
 
-
 ```
  DialogHelper.callDialog(this, "title", "message", "positive", "negative", "neutral", "tag");
-
 ```
 
  * ~~CustomDialog~~
@@ -58,6 +56,7 @@ DialogHelper.customCreate(this)
 ## サンプル
 * SimpleDialog
 
+
 ```
 public class MainActivity extends FragmentActivity implements SimpleDialogsListener{
 
@@ -65,8 +64,13 @@ public class MainActivity extends FragmentActivity implements SimpleDialogsListe
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		DialogHelper.callDialog(this, "title", "message", "positive", "negative", "neutral", "tag");
+		
+		DialogHelper.create(this)
+            .setTitle("title")
+            .setMessage("message")
+            .setPositive("label")
+            .setTouchCancelable(true)
+            .build();
 	}
 
 	@Override
@@ -105,7 +109,11 @@ public class MainActivity extends FragmentActivity implements CustomDialogsListe
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    DialogHelper.callCustomDialog(this, R.layout.layoutId, getEventList(), null);
+    DialogHelper.customCreate(this)
+        .setLayout(R.layout.layoutId)
+        .setEventList(getEventList())
+        .setBackCancelable(true)
+        .build();
   }
 
   @Override
