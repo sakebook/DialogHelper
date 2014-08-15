@@ -10,7 +10,7 @@ import org.robolectric.annotation.RealObject;
  * Created by sakemotoshinya on 2014/08/10.
  */
 @Implements(SimpleDialogsListener.class)
-public class MyShadowActivity {
+public class MyShadowActivity extends CustomDialogs{
     @RealObject
     private SimpleDialogsListener listener;
 
