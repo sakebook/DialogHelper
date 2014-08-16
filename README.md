@@ -8,6 +8,12 @@ Easy way to make dialog for everyone.
 ## 概要
  * DialogFragmentを一行で呼び出せます。独自のレイアウトにも対応。2.3以降対応。
 
+## イメージ
+![image](https://raw.githubusercontent.com/sakebook/android-library-dialog-DialogHelper/gradle/apk/image.png)
+
+## apk
+ [libraries-sample.apk](https://raw.githubusercontent.com/sakebook/android-library-dialog-DialogHelper/gradle/apk/libraries-sample.apk)
+
 ## 取り込み方
 ```
 compile 'com.github.sakebook:DialogHelper:0.1.1@aar'
@@ -64,7 +70,7 @@ public class MainActivity extends FragmentActivity implements SimpleDialogsListe
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		DialogHelper.create(this)
             .setTitle("title")
             .setMessage("message")
