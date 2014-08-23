@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 /**
@@ -242,7 +243,9 @@ public class DialogHelper {
 			if (checkExtends(context)){
 				FragmentManager manager = ((FragmentActivity)context).getSupportFragmentManager();
 				dialog = SimpleDialogs.newInstance(title, message, positive, negative, neutral, outsideCancel, backCancel);
-				dialog.show(manager, tag);
+				FragmentTransaction ft = manager.beginTransaction();
+				ft.add(dialog, this.tag);
+				ft.commitAllowingStateLoss();
 			}
 		}
 
@@ -340,8 +343,10 @@ public class DialogHelper {
 		public void build() {
 			if (checkExtends(context)){
 				FragmentManager manager = ((FragmentActivity)context).getSupportFragmentManager();
-		        dialog = CustomDialogs.newInstance(layoutId, eventList, outsideCancel, backCancel);
-		        dialog.show(manager, tag);
+				dialog = CustomDialogs.newInstance(layoutId, eventList, outsideCancel, backCancel);
+				FragmentTransaction ft = manager.beginTransaction();
+				ft.add(dialog, this.tag);
+				ft.commitAllowingStateLoss();
 			}
 		}
 
